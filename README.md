@@ -182,4 +182,32 @@ chmod 644 authorized_keys
 
 You now have a password-free SSH connection set up.
 
+**NOTE:** If this is your first time using public key authentication, you may need to enable the ssh-agent.
+
+On [Windows](https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement), run the following commands in a Powershell (Run as administrator):
+
+```
+# By default the ssh-agent service is disabled. Configure it to start automatically.
+# Make sure you're running as an Administrator.
+Get-Service ssh-agent | Set-Service -StartupType Automatic
+
+# Start the service
+Start-Service ssh-agent
+
+# This should return a status of Running
+Get-Service ssh-agent
+
+# Now load your key files into ssh-agent
+ssh-add $env:USERPROFILE\.ssh\id_rsa
+```
+
+On UNIX systems (Mac, Linux):
+
+```
+# start the ssh-agent in the background
+eval "$(ssh-agent -s)"
+
+ssh-add ~/.ssh/id_rsa
+```
+
 **Any additional question, don’t hestitate to ask us on Piazza or over email.**
