@@ -1,8 +1,8 @@
-> Most of this tutorial comes from a previous TA of CSCI 2021, Tien Dinh
+> Most of this tutorial comes from a previous TA of CSCI 2021, [Tien Dinh](https://tienpdinh.com/posts/remote-vscode)
 
 # Remote Editing with VSCode
 
-There are numerous reasons why you would want to set up a pipeline which allows you to remotely edit codes on a server. In this tutorial, I will walk through the steps needed to set up VSCode for remote editing, as well as some tips I found useful that will help you have a better experience with VSCode.
+There are numerous reasons why you would want to set up a pipeline which allows you to remotely edit codes on a server. In this tutorial, I will walk through the steps needed to set up VSCode for remote editing, as well as some tips I found useful that will help you have a better experience with VSCode. **Make sure you read the entire document**
 
 ***For CSCI 2021:*** *Remote editing is very beneficial because you don’t have to install any special software or extension on your own computer (except VSCode). VSCode also has a built-in terminal that you can use to run your code from the remote machine you’re currently editing on.*
 
@@ -40,7 +40,7 @@ First you need to make sure you can ssh to this machine, open a new Terminal ses
 ssh x500@machine
 ```
 
-Remember to replace `x500` with your x500 and `machine` with the address of the machine you want to connect to. In my case this command would be:
+Remember to replace `x500` with your x500 and `machine` with the address of the machine you want to connect to. In my case this command would be **(Use your own X500, not `shamb041`)**:
 
 ```
 ssh shamb041@login01.cselabs.umn.edu
@@ -97,17 +97,18 @@ You can also check the status of the connection by looking at the lower left cor
 
 At this point, VSCode is in remote development mode. You can hit File->Open to open directories or files you have on the remote machine.
 
-## (Optional) Password-free Remote Development
+## Password-free Remote Development
 
 It is very frustrating when you have to enter your password everytime you connect to the remote server. By creating a SSH key, you can authorize your machine (and at the same time, VSCode) to connect without password.
 
 **ONLY do this on your personal computer, with SSH key authorization, anyone will be able to connect to your CSELab home directory without your password.**
 
-First create a SSH key on your computer if you haven’t done so, open up Terminal and type:
+First create a SSH key on your computer if you haven’t done so, open up Terminal **on your local machine** and type:
 
 ```
 ssh-keygen -t rsa -b 4096 -C "YOUR_INTERNET_ID@umn.edu"
 ```
+Be sure to replace `YOUR_INTERNET_ID@umn.edu` with your actual university email.
 
 The following will show up in your terminal. Press enter when you are asked where to save your SSH key. This will save it in the default location.
 
@@ -136,7 +137,7 @@ You can obtain your public key by:
 cat ~/.ssh/id_rsa.pub
 ```
 
-Or by opening the `id_rsa.pub` with the text editor of your choice.
+Or by opening the `~/.ssh/id_rsa.pub` with the text editor of your choice. On Windows, for example, the full path to this file should be something like `C:\Users\<username>\.ssh\id_rsa.pub`
 
 For example, my public key is:
 
@@ -165,10 +166,10 @@ touch authorized_keys
 Then you can append your public key to this file using:
 
 ```
-echo "your-key" >> authorized_keys
+echo "<your-key>" >> authorized_keys
 ```
 
-Where `your-key` is what we copied from the `id_rsa.pub` file. The double quote is needed, in my case it would be:
+Where `<your-key>` is what we copied from the `id_rsa.pub` file. The double quote is needed. For example, in my case it would be **(DO NOT COPY THIS, use your own public key)**:
 
 ```
 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDVmFg+PcpbBIID8SjmzSvjiTq+5x2dRpyWGwq3PFR+ZGDIg76Xi6/yf7Q65zmribyJeD0N3ik/9Nbs+DB7VTE1gAHm+yv+5AdZA5VUFbvxSO3jWcLGm3vxN1TTUNHsiJ09j/tlwzbNzji/59IBNlFApy+2HX7Iua7qJ/xcsyeIOtkuSCfNBZFUZ80itFwTcLM/jbRPF1UUJkQJmW6D1qFmbSodCRCMLBg98PW7iIhQ1B59Fi8kBKppveKybj9TdCVcTWNMU3uSsHfZOqS7ZGWjBnnf/nR/vT9/Qb2Rc+03zOAtzS9M6salIN3Smgaqit4rsKpOStUMpATZ231+5/4Uazso6Jy67rwcYFkhVJRRpQuqoXv7K6sCUCxUz+9+4TMLB8srylNfXeZdezUEORNXlffObNA6DbQ5b9mOQtUoFC3JQ6PVy7a84ZO3uaVU3s2porOfdJap9B3f6cltSCyIpKxivPlwy7K7uytMp0JvStHvaTWyhoAFygv21s6hKnAma853pXS9IDA7xHeHNq9b+CoAjv+ZsPHriFabr/N39VtXTOIJvkFTVi8155kdBjEUg4Yg3g2QvPkGfy8gMvhWep7L3ujQIMo5eA/sBXg9p937NeN/5RZG2o0XOr7DMBuS5yzoJ54UD3EM4AzTrM2rDsJ7KzqQQNPSzLlqk47CAQ== shamb041@umn.edu" >> authorized_keys
@@ -209,5 +210,24 @@ eval "$(ssh-agent -s)"
 
 ssh-add ~/.ssh/id_rsa
 ```
+## Moving Files to the Remote Machine
+
+Gone are the days of using `scp` or `sftp` to copy files from your local machine. With VSCode, you can easily move files to and from the remote machine you just connected to.
+
+Once you are connected to the remote machine, go to `File->Open Folder` to open a folder on the remote machine:
+
+<img src="assets/open-folder.png" alt="open-folder"/>
+
+I recommend that you open your home directory so you can access *all* of your files. This will be `/home/<your_x500>/`:
+
+<img src="assets/home-dir.png" alt="home-dir"/>
+
+Click OK, then your window will refresh and after a few seconds you should see all of your files in the `Explorer` tab on the left side of your screen.
+
+To upload files to the remote machine, all you need to do is drag over a file from your local file explorer into the VSCode window:
+
+<img src="assets/upload-file.gif" alt="upload-file"/>
+
+Now you can begin working on the remote machine directly in VSCode!
 
 **Any additional question, don’t hestitate to ask us on Piazza or over email.**
