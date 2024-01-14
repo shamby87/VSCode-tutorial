@@ -1,20 +1,20 @@
 > Most of this tutorial comes from a previous TA of CSCI 2021, [Tien Dinh](https://tienpdinh.com/posts/remote-vscode)
 
-# Remote Editing with VSCode
+# Remote Editing with VS Code
 
-There are numerous reasons why you would want to set up a pipeline which allows you to remotely edit codes on a server. In this tutorial, I will walk through the steps needed to set up VSCode for remote editing, as well as some tips I found useful that will help you have a better experience with VSCode. **Make sure you read the entire document**
+There are numerous reasons why you would want to set up a pipeline which allows you to remotely edit codes on a server. In this tutorial, I will walk through the steps needed to set up VS Code for remote editing, as well as some tips I found useful that will help you have a better experience with VS Code. **Make sure you read the entire document**
 
-***For CSCI 2021:*** *Remote editing is very beneficial because you don’t have to install any special software or extension on your own computer (except VSCode). VSCode also has a built-in terminal that you can use to run your code from the remote machine you’re currently editing on.*
+***For CSCI 2021:*** *Remote editing is very beneficial because you don’t have to install any special software or extension on your own computer (except VS Code). VS Code also has a built-in terminal that you can use to run your code from the remote machine you’re currently editing on.*
 
-## VSCode
+## VS Code
 ### Download
-VSCode can be downloaded from the Microsoft website [here](https://code.visualstudio.com/). Make sure you download the version compatible with your OS.
+VS Code can be downloaded from the Microsoft website [here](https://code.visualstudio.com/). Make sure you download the version compatible with your OS.
 
-You might want to get yourself familiar to VSCode if you haven’t used it before. This is a great text editor that offers many different features which can help enhance your coding experiences. You can have a look at Microsoft’s [tutorial](https://code.visualstudio.com/docs/introvideos/basics) if you feel the need for it, this tutorial only focuses on remote editing capability of VSCode.
+You might want to get yourself familiar to VS Code if you haven’t used it before. This is a great text editor that offers many different features which can help enhance your coding experiences. You can have a look at Microsoft’s [tutorial](https://code.visualstudio.com/docs/introvideos/basics) if you feel the need for it, this tutorial only focuses on remote editing capability of VS Code.
 
-### Installing VSCode Remote extensions
+### Installing VS Code Remote extensions
 
-Open up VSCode, on the left panel, click on the extensions tab:
+Open up VS Code, on the left panel, click on the extensions tab:
 
 <img src="assets/extensions.png" alt="extensions" width="50%"/>
 
@@ -22,9 +22,9 @@ Search for “remote development” and install the package from Microsoft remot
 
 <img src="assets/remote-development.png" alt="remote-development"/>
 
-You can also have a look at this extension on the VSCode website: [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
+You can also have a look at this extension on the VS Code website: [Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
-After installing the extensions, you might have to close and reopen VSCode. If the installation process completed without any error, you should see a little blue (or maybe green or purple) icon appear at the lower left corner of VSCode:
+After installing the extensions, you might have to close and reopen VS Code. If the installation process completed without any error, you should see a little blue (or maybe green or purple) icon appear at the lower left corner of VS Code:
 
 <img src="assets/remote-icon.png" alt="remote-icon" width="50%"/>
 
@@ -32,7 +32,7 @@ Clicking on this icon will bring up the setup for Remote Development:
 
 <img src="assets/rdev-menu.png" alt="remote-icon"/>
 
-At this point, you need to decide what machine you want VSCode to connect to when doing remote editing. Most CSE lab machines will work, as long as they are running Linux. A full list of CSE lab machines can be found [here](https://cse.umn.edu/cseit/classrooms-labs). In this example, I will use `login01.cselabs.umn.edu` as the destination machine. You can use the same machine if you want.
+At this point, you need to decide what machine you want VS Code to connect to when doing remote editing. Most CSE lab machines will work, as long as they are running Linux. A full list of CSE lab machines can be found [here](https://cse.umn.edu/cseit/classrooms-labs). In this example, I will use `login01.cselabs.umn.edu` as the destination machine. You can use the same machine if you want.
 
 First you need to make sure you can ssh to this machine, open a new Terminal session and type in the following command:
 
@@ -63,19 +63,21 @@ Last login: Fri Jun 12 23:02:09 2020 from x.x.x.x
 shamb041@csel-login01:/home/shamb041 $ 
 ```
 
-Back to VSCode, open up the Remote Development menu and select “Remote-SSH: Connect to Host…”. Then click “Add New SSH Host…”. At this point you want to enter the same command you used to connect to the remote machine, in my case, it would be:
+Back to VS Code, open up the Remote Development menu and select “Remote-SSH: Connect to Host…”. Then click “Add New SSH Host…”. At this point you want to enter the same command you used to connect to the remote machine, in my case, it would be:
 
 <img src="assets/new-connection.png" alt="new-connection"/>
 
-Hit Enter until the lower right of VSCode shows a notification saying it has successfully added the host.
+Hit Enter until the lower right of VS Code shows a notification saying it has successfully added the host.
 
 Now if you open up Remote Development menu and hit “Remote-SSH: Connect to Host…” again, the host you just added will show up as an option:
 
 <img src="assets/added-host.png" alt="added-host"/>
 
-Click on this host, the log will ask for your password, put in your password and wait a little bit until the log settles, that’s when you know the connection is successful. You might have to select the destination platform the first time you connect, just select Linux: select-plat
+Click on this host, the log will ask for your password, put in your password and wait a little bit until the log settles, that’s when you know the connection is successful. You might have to select the destination platform the first time you connect, just select Linux: 
 
 <img src="assets/select-plat.png" alt="select-plat"/>
+
+Due to issues with Duo authentication, it might appear to ask you for your password multiple times during the login process. If this happens, click the `terminal` tab at the bottom of the screen to see if it is asking for Duo. If so, type directly into the terminal to do your normal Duo authentication and you can enter a blank password if the popup at the top of the screen is still there.
 
 If the log shows something like below, the connection is successful:
 
@@ -91,15 +93,15 @@ platform==linux==
 13bf30366675: end
 ```
 
-You can also check the status of the connection by looking at the lower left corner of VSCode, in this case it should show:
+You can also check the status of the connection by looking at the lower left corner of VS Code, in this case it should show:
 
 <img src="assets/successful-connection.png" alt="successful-connection"/>
 
-At this point, VSCode is in remote development mode. You can hit File->Open to open directories or files you have on the remote machine.
+At this point, VS Code is in remote development mode. You can hit File->Open to open directories or files you have on the remote machine.
 
 ## Password-free Remote Development
 
-It is very frustrating when you have to enter your password everytime you connect to the remote server. By creating a SSH key, you can authorize your machine (and at the same time, VSCode) to connect without password.
+It is very frustrating when you have to enter your password everytime you connect to the remote server. By creating a SSH key, you can authorize your machine (and at the same time, VS Code) to connect without password.
 
 **ONLY do this on your personal computer, with SSH key authorization, anyone will be able to connect to your CSELab home directory without your password.**
 
@@ -210,9 +212,12 @@ eval "$(ssh-agent -s)"
 
 ssh-add ~/.ssh/id_rsa
 ```
+
+If you are still having issues with the ssh key setup, try the tutorial from CSE-IT under the "Key-based authentication" header [here](https://cse.umn.edu/cseit/self-help-guides/secure-shell-ssh).
+
 ## Moving Files to the Remote Machine
 
-Gone are the days of using `scp` or `sftp` to copy files from your local machine. With VSCode, you can easily move files to and from the remote machine you just connected to.
+Gone are the days of using `scp` or `sftp` to copy files from your local machine. With VS Code, you can easily move files to and from the remote machine you just connected to.
 
 Once you are connected to the remote machine, go to `File->Open Folder` to open a folder on the remote machine:
 
@@ -224,10 +229,10 @@ I recommend that you open your home directory so you can access *all* of your fi
 
 Click OK, then your window will refresh and after a few seconds you should see all of your files in the `Explorer` tab on the left side of your screen.
 
-To upload files to the remote machine, all you need to do is drag over a file from your local file explorer into the VSCode window:
+To upload files to the remote machine, all you need to do is drag over a file from your local file explorer into the VS Code window:
 
 <img src="assets/upload-file.gif" alt="upload-file"/>
 
-Now you can begin working on the remote machine directly in VSCode!
+Now you can begin working on the remote machine directly in VS Code!
 
 **Any additional question, don’t hestitate to ask us on Piazza or over email.**
