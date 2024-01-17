@@ -213,7 +213,7 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
 
-If you are having trouble, [here](https://www.youtube.com/watch?v=F-u6SEDKGeI) is a video tutorial from a TA, Omar Ahmed, going through these steps.
+If you are having trouble, [here](https://www.youtube.com/watch?v=F-u6SEDKGeI) is a video tutorial from a TA, Omar Elgohary, going through these steps.
 
 Additionally, you can try the tutorial from CSE-IT under the "Key-based authentication" header [here](https://cse.umn.edu/cseit/self-help-guides/secure-shell-ssh). 
 
